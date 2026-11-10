@@ -1,26 +1,299 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   MR SERVICES — Global design system
+   Values measured from the reference (mrservices.co.in) at 375–1920px.
+   Everything below becomes a CSS variable on :root and a Tailwind utility.
+   ========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* ---- Typography --------------------------------------------------------
+     The reference loads Outfit but never applies it (its --font-outfit
+     variable is scoped to <body>, below where --font-sans reads it), so what
+     actually renders is the system UI stack: Segoe UI on Windows, SF Pro on
+     macOS/iOS, Roboto on Android. Kept identical for a pixel match. */
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Tailwind's default type scale is used as-is (text-sm 14px … text-7xl
+     72px); these fill the gaps the reference uses. */
+  --text-2xs: 0.625rem; /* 10px — kicker labels on mobile */
+  --text-2xs--line-height: 1;
+  --tracking-kicker: 0.2em; /* diamond eyebrow labels */
+  --leading-heading: 1.1; /* large section titles */
+
+  /* ---- Breakpoints (Tailwind defaults, pinned so they can't drift) ------- */
+  --breakpoint-sm: 40rem; /*  640px */
+  --breakpoint-md: 48rem; /*  768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-2xl: 96rem; /* 1536px */
+
+  /* ---- Brand colours ----------------------------------------------------- */
+  --color-primary: #1e3a8a; /* navy — CTAs, accents, stats card */
+  --color-primary-dark: #172554; /* navy hover */
+  --color-whatsapp: #25d366;
+  --color-star: #ffb800;
+
+  /* ---- Spacing ----------------------------------------------------------- */
+  --spacing-nav: 4.5rem; /* compact navbar height (72px): top-nav, h-nav … */
+  --spacing-section: 6rem; /* py-24 — default section rhythm */
+  --spacing-section-lg: 8rem; /* py-32 — feature sections */
+  --spacing-section-sm: 4rem; /* py-16 — brand strip */
+
+  /* ---- Radius ------------------------------------------------------------ */
+  /* Defaults also in use: rounded-xl 12px (buttons), rounded-2xl 16px
+     (tiles, chips), rounded-3xl 24px (photo frames), rounded-full (pills). */
+  --radius-card: 2rem; /* 32px — service cards, info rows, big buttons */
+  --radius-card-inner: 1.8rem; /* map viewport inside its frame */
+  --radius-media: 2.5rem; /* 40px — hero image, review cards, map frame */
+  --radius-panel: 3rem; /* 48px — booking panel, workshop image */
+
+  /* ---- Shadows ----------------------------------------------------------- */
+  /* Defaults also in use: shadow-sm, shadow-md, shadow-lg, shadow-xl, shadow-2xl. */
+  --shadow-soft: 0 10px 40px rgb(0 0 0 / 0.03); /* review cards */
+  --shadow-soft-hover: 0 20px 50px rgb(0 0 0 / 0.08);
+  --shadow-panel: 0 20px 80px rgb(0 0 0 / 0.06); /* booking panel */
+  --shadow-lift: 0 10px 30px rgb(59 130 246 / 0.1); /* area chip hover */
+  --shadow-lift-lg: 0 10px 40px rgb(59 130 246 / 0.1); /* contact row hover */
+  --shadow-glow: 0 0 10px rgb(37 99 235 / 0.5); /* eyebrow diamond */
+  --shadow-glow-lg: 0 0 20px rgb(37 99 235 / 0.3); /* social icon hover */
+  --shadow-wa-glow: 0 10px 30px rgb(37 211 102 / 0.3); /* WhatsApp CTA hover */
+  --shadow-ink-glow: 0 10px 30px rgb(2 6 23 / 0.2); /* dark CTA hover */
+
+  /* ---- Blur (decorative background blobs) -------------------------------- */
+  --blur-blob: 100px;
+  --blur-blob-lg: 120px;
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes pulse-ring {
+    from {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    to {
+      transform: scale(1.6);
+      opacity: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Semantic colour roles, mapped onto Tailwind's palette (the same palette the
+   reference uses), so text-ink / bg-surface / border-line etc. stay in sync. */
+@theme inline {
+  --color-accent: var(--color-blue-600); /* eyebrows, links, icons */
+  --color-accent-soft: var(--color-blue-100); /* icon tiles, pills */
+  --color-accent-end: var(--color-indigo-600); /* gradient text end stop */
+  --color-ink: var(--color-slate-900); /* headings, primary text */
+  --color-ink-deep: var(--color-slate-950); /* dark CTA */
+  --color-ink-soft: var(--color-slate-700); /* nav links, emphasised list text */
+  --color-body: var(--color-slate-600); /* paragraphs */
+  --color-muted: var(--color-slate-500); /* labels, secondary text */
+  --color-faint: var(--color-slate-400); /* meta text */
+  --color-surface: var(--color-slate-50); /* alternate section background */
+  --color-line: var(--color-slate-200); /* borders */
+  --color-line-soft: var(--color-slate-100); /* hairlines */
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+
+/* Tailwind's stepped container (max-width = current breakpoint: 640 / 768 /
+   1024 / 1280 / 1536px), centred, with the reference's 16px → 24px gutter. */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant md {
+    padding-inline: 1.5rem;
+  }
+}
+
+@utility section-y {
+  padding-block: var(--spacing-section);
+}
+
+@utility section-y-lg {
+  padding-block: var(--spacing-section-lg);
+}
+
+@utility section-y-sm {
+  padding-block: var(--spacing-section-sm);
+}
+
+/* Shimmer sweep used on the navy cards. */
+@utility shimmer {
+  background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(255 255 255 / 0.15) 50%,
+      transparent 100%
+    )
+    0 0 / 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--spacing-nav);
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  /* Reference rule: every heading is bold and tight-tracked by default. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+/* ==========================================================================
+   Components — typography & buttons. Utilities still override these, e.g.
+   <h2 class="type-title lg:text-6xl">.
+   ========================================================================== */
+
+@layer components {
+  /* 48 → 60 → 72px, weight 900 — hero H1, contact title */
+  .type-display {
+    @apply text-5xl leading-tight font-black tracking-tight text-ink md:text-6xl lg:text-7xl;
+  }
+
+  /* 36 → 48px, weight 900 — section titles */
+  .type-title {
+    @apply text-4xl font-black text-ink md:text-5xl;
+  }
+
+  /* 18 → 20px, relaxed — intro paragraphs */
+  .type-lead {
+    @apply text-lg leading-relaxed text-body md:text-xl;
+  }
+
+  /* 24px, weight 900 — card titles */
+  .type-card-title {
+    @apply text-2xl font-black text-ink;
+  }
+
+  /* 14px caps, 0.1em — "OUR EXPERTISE" style eyebrow */
+  .type-eyebrow {
+    @apply text-sm font-bold tracking-widest text-accent uppercase;
+  }
+
+  /* 10 → 12px caps, 0.2em — diamond eyebrow */
+  .type-kicker {
+    @apply text-2xs font-bold tracking-kicker text-accent uppercase md:text-xs;
+  }
+
+  /* 14px caps, muted — field labels ("CALL US DIRECTLY") */
+  .type-label {
+    @apply text-sm font-bold tracking-widest text-muted uppercase;
+  }
+
+  /* Buttons ------------------------------------------------------------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-3 font-bold text-white transition-all;
+  }
+
+  /* Hero-size: 18px, 32×16 padding, 12px radius, grows on hover */
+  .btn-lg {
+    @apply rounded-xl px-8 py-4 text-lg hover:scale-105 hover:shadow-xl active:scale-95;
+  }
+
+  /* Full-width booking buttons: 18 → 20px black weight, 32px radius */
+  .btn-xl {
+    @apply w-full rounded-card py-5 text-lg font-black duration-300 hover:-translate-y-1 active:translate-y-0 md:py-6 md:text-xl;
+  }
+
+  /* Colour variants. Hover shadows are set per use: tinted (shadow-green-200)
+     on hero buttons, glow tokens (shadow-wa-glow) on booking buttons. */
+  .btn-primary {
+    @apply bg-primary;
+  }
+
+  .btn-whatsapp {
+    @apply bg-whatsapp;
+  }
+
+  .btn-ink {
+    @apply bg-ink-deep;
+  }
+}
+
+/* ==========================================================================
+   Third-party: Leaflet
+   ========================================================================== */
+
+.leaflet-container {
+  font-family: inherit;
+  background: var(--color-slate-100);
+}
+
+.leaflet-control-zoom a {
+  color: var(--color-ink) !important;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
