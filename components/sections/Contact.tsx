@@ -2,8 +2,9 @@ import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { GradientText } from "@/components/ui/GradientText";
-import { Reveal } from "@/components/ui/Reveal";
+import { MotionDiv, MotionH3, MotionP } from "@/components/ui/motion";
 import { site, telHref, whatsappHref } from "@/lib/content";
+import { inView } from "@/lib/motion";
 
 type InfoRowProps = {
   icon: ReactNode;
@@ -61,7 +62,7 @@ export function Contact() {
       <div className="relative z-10 container">
         <div className="grid items-center gap-16 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <Reveal>
+            <MotionDiv {...inView({ y: 30 }, { duration: 0.6 })}>
               <Eyebrow className="mb-8">Contact Us</Eyebrow>
               <h2 className="type-display mb-6">
                 Ready to get your <GradientText>service?</GradientText>
@@ -71,39 +72,47 @@ export function Contact() {
                 a quick call, and we will send a technician straight to your
                 location.
               </p>
-            </Reveal>
+            </MotionDiv>
 
             <div className="space-y-6">
-              <Reveal delay={0.05}>
+              <MotionDiv {...inView({ x: -30 }, { duration: 0.5, delay: 0.2 })}>
                 <InfoRow icon={<Phone className="h-6 w-6" />} label="Call Us Directly" value={site.phone} href={telHref} large />
-              </Reveal>
-              <Reveal delay={0.1}>
+              </MotionDiv>
+              <MotionDiv {...inView({ x: -30 }, { duration: 0.5, delay: 0.3 })}>
                 <InfoRow icon={<MapPin className="h-6 w-6" />} label="Our Location" value={`${site.location}.`} />
-              </Reveal>
-              <Reveal delay={0.15}>
+              </MotionDiv>
+              <MotionDiv {...inView({ x: -30 }, { duration: 0.5, delay: 0.4 })}>
                 <InfoRow icon={<Clock className="h-6 w-6" />} label="Working Hours" value={site.hours} />
-              </Reveal>
-              <Reveal delay={0.2}>
+              </MotionDiv>
+              <MotionDiv {...inView({ x: -30 }, { duration: 0.5, delay: 0.5 })}>
                 <InfoRow icon={<Mail className="h-6 w-6" />} label="Email Us" value={site.email} href={`mailto:${site.email}`} />
-              </Reveal>
+              </MotionDiv>
             </div>
           </div>
 
-          <Reveal className="relative lg:col-span-6" x={30} y={0} delay={0.2}>
+          <MotionDiv
+            {...inView({ y: 40, scale: 0.95 }, { duration: 0.7, delay: 0.2 })}
+            className="relative lg:col-span-6"
+          >
             <div className="relative isolate overflow-hidden rounded-panel border border-line-soft bg-white p-10 shadow-panel md:p-14">
               <div aria-hidden className="pointer-events-none absolute top-0 right-0 -z-10 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-green-500/5 blur-3xl" />
               <div aria-hidden className="pointer-events-none absolute bottom-0 left-0 -z-10 h-64 w-64 -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-500/5 blur-3xl" />
 
-              <h3 className="mb-4 text-center text-3xl font-black text-ink sm:text-left md:text-4xl">
+              <MotionH3
+                {...inView({ y: 20 }, { duration: 0.5, delay: 0.4 })}
+                className="mb-4 text-center text-3xl font-black text-ink sm:text-left md:text-4xl">
                 Book instantly.
-              </h3>
-              <p className="mb-10 text-center text-base leading-relaxed font-medium text-muted sm:text-left md:text-lg">
+              </MotionH3>
+              <MotionP
+                {...inView({ y: 20 }, { duration: 0.5, delay: 0.5 })}
+                className="mb-10 text-center text-base leading-relaxed font-medium text-muted sm:text-left md:text-lg"
+              >
                 The fastest way to reach us. Tap below to securely open an
                 immediate WhatsApp conversation with our expert engineers right
                 now.
-              </p>
+              </MotionP>
 
-              <div className="space-y-5">
+              <MotionDiv {...inView({ y: 20 }, { duration: 0.5, delay: 0.6 })} className="space-y-5">
                 <a
                   href={whatsappHref()}
                   target="_blank"
@@ -120,9 +129,11 @@ export function Contact() {
                   <Phone className="h-6 w-6 text-slate-300 md:h-7 md:w-7" />
                   <span>Call {site.phone}</span>
                 </a>
-              </div>
+              </MotionDiv>
 
-              <div className="mt-10 flex flex-col items-center gap-4 border-t border-line-soft pt-8 text-center sm:flex-row sm:justify-between sm:gap-0 sm:text-left md:mt-12 md:pt-10">
+              <MotionDiv
+                {...inView({}, { duration: 0.5, delay: 0.7 })}
+                className="mt-10 flex flex-col items-center gap-4 border-t border-line-soft pt-8 text-center sm:flex-row sm:justify-between sm:gap-0 sm:text-left md:mt-12 md:pt-10">
                 <div>
                   <p className="mb-1 text-xs font-bold tracking-widest text-faint uppercase md:text-sm">
                     Supported Devices
@@ -132,9 +143,9 @@ export function Contact() {
                 <div className="shrink-0 rounded-2xl border border-blue-100 bg-blue-50 px-5 py-3 text-xs font-black tracking-widest text-blue-700 uppercase md:text-sm">
                   Fast Repair
                 </div>
-              </div>
+              </MotionDiv>
             </div>
-          </Reveal>
+          </MotionDiv>
         </div>
       </div>
     </section>

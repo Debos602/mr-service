@@ -1,7 +1,8 @@
 import { Check, Quote, Star } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { GradientText } from "@/components/ui/GradientText";
-import { Reveal } from "@/components/ui/Reveal";
+import { MotionDiv } from "@/components/ui/motion";
+import { inView } from "@/lib/motion";
 import { testimonials } from "@/lib/content";
 
 type Review = (typeof testimonials)[number];
@@ -42,8 +43,8 @@ export function Testimonials() {
   return (
     <section className="relative overflow-hidden border-t border-line/60 section-y-lg bg-surface">
       <div className="relative z-10 container mb-16">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <Eyebrow both className="mb-6 justify-center">
+        <MotionDiv {...inView({ y: 30 }, { duration: 0.7 })} className="mx-auto max-w-3xl text-center">
+          <Eyebrow both diamondDelay={0.2} className="mb-6 justify-center">
             Real Stories
           </Eyebrow>
           <h2 className="type-title mb-6 text-5xl leading-tight tracking-tight md:text-6xl">
@@ -54,7 +55,7 @@ export function Testimonials() {
             households who trust us to keep their essential electronics running
             smoothly.
           </p>
-        </Reveal>
+        </MotionDiv>
       </div>
 
       <div className="relative flex w-full flex-col items-center overflow-hidden">

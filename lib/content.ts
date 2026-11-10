@@ -177,8 +177,8 @@ export const features: { title: string; description: string; icon: FeatureIcon }
 ];
 
 export const stats = [
-  { value: 10, suffix: "+", label: ["Years of", "Experience"] },
-  { value: 5, suffix: "K+", label: ["Successful", "Repairs"] },
+  { value: "10", suffix: "+", label: ["Years of", "Experience"] },
+  { value: "5K", suffix: "+", label: ["Successful", "Repairs"] },
 ] as const;
 
 export const areas: { name: string; lat: number; lng: number }[] = [

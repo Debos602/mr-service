@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { MotionDiv } from "@/components/ui/motion";
+import { inView } from "@/lib/motion";
 import { brandLogo, brands } from "@/lib/content";
 
 function BrandCard({ brand, hidden }: { brand: string; hidden?: boolean }) {
@@ -20,14 +22,14 @@ function BrandCard({ brand, hidden }: { brand: string; hidden?: boolean }) {
 export function Brands() {
   return (
     <section className="relative overflow-hidden border-y border-line section-y-sm bg-surface">
-      <div className="container mb-10 text-center md:px-4">
+      <MotionDiv {...inView({ y: 20 }, { duration: 0.6 })} className="container mb-10 text-center md:px-4">
         <h2 className="mb-2 text-3xl font-extrabold tracking-tight text-ink">
           Supported Top Brands
         </h2>
         <p className="text-sm font-medium text-muted lg:text-base">
           Professional service and genuine parts for all premium devices
         </p>
-      </div>
+      </MotionDiv>
 
       <div className="group relative flex w-full max-w-[100vw] overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-surface to-transparent md:w-32" />

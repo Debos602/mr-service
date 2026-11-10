@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { Camera, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { MotionDiv } from "@/components/ui/motion";
 import { footer, site, telHref, whatsappHref } from "@/lib/content";
+import { inView } from "@/lib/motion";
 
 const socialClass =
   "rounded-full border border-blue-200 bg-blue-50 p-3 text-accent transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:border-accent hover:bg-accent hover:text-white hover:shadow-glow-lg";
@@ -21,7 +23,7 @@ export function Footer() {
 
       <div className="relative z-10 container">
         <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          <div className="space-y-8 lg:col-span-4 lg:pr-8">
+          <MotionDiv {...inView({ y: 30 }, { duration: 0.6 })} className="space-y-8 lg:col-span-4 lg:pr-8">
             <a href="#" className="group flex items-center" aria-label={`${site.name} home`}>
               <div className="w-fit rounded-xl px-5 py-3 shadow-md ring-1 ring-line transition-all duration-300 group-hover:shadow-blue-200">
                 <Image
@@ -45,9 +47,9 @@ export function Footer() {
                 <Globe className="h-5 w-5" />
               </a>
             </div>
-          </div>
+          </MotionDiv>
 
-          <div className="lg:col-span-2">
+          <MotionDiv {...inView({ y: 30 }, { duration: 0.6, delay: 0.1 })} className="lg:col-span-2">
             <h3 className="mb-8 text-lg font-black tracking-wide text-ink">Company</h3>
             <ul className="space-y-4 font-medium">
               {footer.company.map((link) => (
@@ -61,9 +63,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionDiv>
 
-          <div className="lg:col-span-3">
+          <MotionDiv {...inView({ y: 30 }, { duration: 0.6, delay: 0.2 })} className="lg:col-span-3">
             <h3 className="mb-8 text-lg font-black tracking-wide text-ink">Specialties</h3>
             <ul className="space-y-4 font-medium">
               {footer.specialties.map((item) => (
@@ -73,9 +75,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionDiv>
 
-          <div className="lg:col-span-3">
+          <MotionDiv {...inView({ y: 30 }, { duration: 0.6, delay: 0.3 })} className="lg:col-span-3">
             <h3 className="mb-8 text-lg font-black tracking-wide text-ink">Get in Touch</h3>
             <ul className="space-y-6">
               {contactItems.map(({ icon: Icon, label, value, href }) => (
@@ -96,10 +98,13 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MotionDiv>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-line pt-8 md:flex-row">
+        <MotionDiv
+          {...inView({}, { duration: 0.6, delay: 0.4 })}
+          className="flex flex-col items-center justify-between gap-6 border-t border-line pt-8 md:flex-row"
+        >
           <p className="text-sm font-bold text-faint">
             © {site.copyrightYear} {site.name}. All rights reserved.
           </p>
@@ -107,7 +112,7 @@ export function Footer() {
             <a href="#" className="transition-colors hover:text-accent">Privacy Policy</a>
             <a href="#" className="transition-colors hover:text-accent">Terms of Service</a>
           </div>
-        </div>
+        </MotionDiv>
         <div className="mt-6 border-t border-line-soft pt-5 text-center">
           <p className="text-[11px] font-medium tracking-wide text-slate-300 select-none">
             {site.poweredBy}

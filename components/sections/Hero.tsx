@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { ArrowRight, MessageCircle, Phone } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
+import { MotionDiv, MotionH1, MotionP } from "@/components/ui/motion";
 import { hero, images, telHref, whatsappHref } from "@/lib/content";
+import { onMount } from "@/lib/motion";
 
 export function Hero() {
   return (
@@ -11,26 +12,37 @@ export function Hero() {
 
       <div className="relative z-10 container">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal x={-30} y={0}>
-            <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-accent-soft px-4 py-2 text-sm font-bold tracking-wide text-blue-700 uppercase">
+          <MotionDiv {...onMount({ x: -50 }, { duration: 0.6 })}>
+            <MotionDiv
+              {...onMount({ y: -20 }, { duration: 0.5, delay: 0.3 })}
+              className="mb-6 inline-flex items-center space-x-2 rounded-full bg-accent-soft px-4 py-2 text-sm font-bold tracking-wide text-blue-700 uppercase">
               <span className="relative flex h-2 w-2" aria-hidden>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
               </span>
               <span>{hero.badge}</span>
-            </div>
+            </MotionDiv>
 
-            <h1 className="type-display mb-6">
+            <MotionH1
+              {...onMount({ y: 30 }, { duration: 0.7, delay: 0.2 })}
+              className="type-display mb-6"
+            >
               {hero.titleStart} <br />
               <span className="text-primary">{hero.titleAccent}</span> <br />
               {hero.titleEnd}
-            </h1>
+            </MotionH1>
 
-            <p className="type-lead mb-10 max-w-xl">
+            <MotionP
+              {...onMount({ y: 20 }, { duration: 0.6, delay: 0.4 })}
+              className="type-lead mb-10 max-w-xl"
+            >
               {hero.lead}
-            </p>
+            </MotionP>
 
-            <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <MotionDiv
+              {...onMount({ y: 20 }, { duration: 0.6, delay: 0.6 })}
+              className="flex flex-col items-center gap-4 sm:flex-row"
+            >
               <a
                 href={whatsappHref()}
                 target="_blank"
@@ -47,15 +59,21 @@ export function Hero() {
                 <Phone className="h-6 w-6" />
                 <span>Call Now</span>
               </a>
-            </div>
+            </MotionDiv>
 
-            <p className="mt-8 flex items-center text-sm font-bold text-faint">
+            <MotionP
+              {...onMount({}, { duration: 0.5, delay: 0.8 })}
+              className="mt-8 flex items-center text-sm font-bold text-faint"
+            >
               <ArrowRight className="mr-2 h-4 w-4 text-primary" />
               {hero.note}
-            </p>
-          </Reveal>
+            </MotionP>
+          </MotionDiv>
 
-          <Reveal className="relative hidden lg:block" x={30} y={0} delay={0.2}>
+          <MotionDiv
+            {...onMount({ scale: 0.8 }, { duration: 0.8, delay: 0.2 })}
+            className="relative hidden lg:block"
+          >
             <div className="group relative z-10 overflow-hidden rounded-media border-8 border-white shadow-2xl">
               <Image
                 src={images.hero.src}
@@ -69,7 +87,7 @@ export function Hero() {
               <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
             </div>
 
-            <div className="absolute -bottom-6 -left-6 z-20 rounded-2xl border border-line-soft bg-white p-6 shadow-xl">
+            <div className="absolute -bottom-6 -left-6 z-20 animate-card-bob rounded-2xl border border-line-soft bg-white p-6 shadow-xl">
               <div className="flex items-center space-x-4">
                 <div className="rounded-full bg-green-100 p-3 text-green-600">
                   <ArrowRight className="h-6 w-6 -rotate-45" />
@@ -83,10 +101,10 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="absolute -top-4 -right-4 z-20 rounded-2xl bg-primary px-5 py-3 text-sm font-black tracking-wider text-white uppercase shadow-xl">
+            <div className="absolute -top-4 -right-4 z-20 animate-badge rounded-2xl bg-primary px-5 py-3 text-sm font-black tracking-wider text-white uppercase shadow-xl">
               {hero.sameDay}
             </div>
-          </Reveal>
+          </MotionDiv>
         </div>
       </div>
     </section>

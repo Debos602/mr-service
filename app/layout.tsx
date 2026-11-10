@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { MotionProvider } from "@/components/ui/motion";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -27,7 +28,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

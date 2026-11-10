@@ -1,8 +1,9 @@
 import { MapPin } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { GradientText } from "@/components/ui/GradientText";
-import { Reveal } from "@/components/ui/Reveal";
+import { MotionDiv, MotionLi } from "@/components/ui/motion";
 import { areas, mapView } from "@/lib/content";
+import { inView } from "@/lib/motion";
 import { AreaMap } from "./AreaMap";
 
 export function ServiceAreas() {
@@ -17,7 +18,7 @@ export function ServiceAreas() {
       <div className="relative z-10 container">
         <div className="grid items-center gap-12 md:gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Reveal>
+            <MotionDiv {...inView({ y: 20 }, { duration: 0.6 })}>
               <Eyebrow ping className="mb-6 md:mb-8">
                 Extensive Coverage
               </Eyebrow>
@@ -30,14 +31,13 @@ export function ServiceAreas() {
                 carry heavy devices—just give us a call, and our technicians will
                 come directly to your home!
               </p>
-            </Reveal>
+            </MotionDiv>
 
             <ul className="grid gap-3 sm:grid-cols-2 md:gap-4">
               {areas.map((area, i) => (
-                <Reveal
-                  as="li"
+                <MotionLi
                   key={area.name}
-                  delay={i * 0.06}
+                  {...inView({ x: -20 }, { duration: 0.4, delay: 0.1 * i })}
                   className="group flex cursor-default items-center space-x-4 rounded-2xl border border-line bg-white p-3 transition-all duration-300 hover:border-blue-400 hover:shadow-lift md:p-4"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-line-soft transition-colors duration-300 group-hover:bg-accent">
@@ -46,18 +46,15 @@ export function ServiceAreas() {
                   <span className="text-sm font-bold text-ink-soft transition-colors duration-300 group-hover:text-ink md:text-base">
                     {area.name}
                   </span>
-                </Reveal>
+                </MotionLi>
               ))}
             </ul>
           </div>
 
-          <Reveal
-            className="relative mb-10 h-full min-h-[400px] lg:col-span-7 lg:mb-0 lg:min-h-[500px]"
-            x={30}
-            y={0}
-            delay={0.2}
-          >
-            <div className="relative h-[400px] w-full rounded-card border border-line-soft bg-white p-1.5 shadow-2xl shadow-line md:h-full md:rounded-media md:p-2">
+          <div className="relative mb-10 h-full min-h-[400px] lg:col-span-7 lg:mb-0 lg:min-h-[500px]">
+            <MotionDiv
+              {...inView({ scale: 0.95 }, { duration: 0.8, ease: "easeOut" })}
+              className="relative h-[400px] w-full rounded-card border border-line-soft bg-white p-1.5 shadow-2xl shadow-line md:h-full md:rounded-media md:p-2">
               <div className="relative isolate h-full min-h-[400px] w-full overflow-hidden rounded-card-inner border border-line bg-line-soft md:min-h-[550px]">
                 <div className="absolute inset-0 z-0">
                   <AreaMap />
@@ -77,8 +74,8 @@ export function ServiceAreas() {
                   </div>
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </MotionDiv>
+          </div>
         </div>
       </div>
     </section>
