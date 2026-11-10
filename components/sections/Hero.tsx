@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, MessageCircle, Phone } from "lucide-react";
 import { MotionDiv, MotionH1, MotionP } from "@/components/ui/motion";
-import { hero, images, telHref, whatsappHref } from "@/lib/content";
+import { hero, images, imageSizes, telHref, whatsappHref } from "@/lib/content";
 import { onMount } from "@/lib/motion";
 
 export function Hero() {
@@ -81,7 +81,7 @@ export function Hero() {
                 height={images.hero.height}
                 alt="MR SERVICES Professional Technician"
                 priority
-                sizes="(min-width: 1280px) 600px, 50vw"
+                sizes={imageSizes.hero}
                 className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />

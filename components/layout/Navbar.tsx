@@ -7,13 +7,7 @@ import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, site, telHref } from "@/lib/content";
 
-/**
- * Fixed navbar, matched to the reference implementation:
- * - top of page: transparent, 20px vertical padding (96px tall on desktop)
- * - scrolled past 20px: 90% white + backdrop blur + shadow-md, 12px padding (80px)
- * - links fade down in sequence on load; the phone pill scales in last
- * - mobile: hamburger opens a full-height white panel below the bar
- */
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

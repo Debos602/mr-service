@@ -2,13 +2,14 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MotionDiv, MotionLi } from "@/components/ui/motion";
-import { about, images } from "@/lib/content";
+import { about, images, imageSizes } from "@/lib/content";
 import { inView } from "@/lib/motion";
 
 type Photo = {
   src: string;
   alt: string;
   aspect: string;
+  sizes: string;
   offset: string;
   /** Reference entrance: from → to (to includes the resting nudge, e.g. y: 8). */
   from: { x?: number; y?: number; rotate?: number };
@@ -18,12 +19,12 @@ type Photo = {
 
 const columns: Photo[][] = [
   [
-    { src: images.appliance.src, alt: "MR SERVICES Technician", aspect: "aspect-square", offset: "translate-y-8", from: { y: 40, rotate: -3 }, to: { y: 8, rotate: 0 }, delay: 0.1 },
-    { src: images.tv.src, alt: "LED TV Repair", aspect: "aspect-[3/4]", offset: "translate-x-4", from: { x: -40 }, to: { x: 4 }, delay: 0.3 },
+    { src: images.appliance.src, alt: "MR SERVICES Technician", sizes: imageSizes.aboutAppliance, aspect: "aspect-square", offset: "translate-y-8", from: { y: 40, rotate: -3 }, to: { y: 8, rotate: 0 }, delay: 0.1 },
+    { src: images.tv.src, alt: "LED TV Repair", sizes: imageSizes.aboutTv, aspect: "aspect-[3/4]", offset: "translate-x-4", from: { x: -40 }, to: { x: 4 }, delay: 0.3 },
   ],
   [
-    { src: images.lab.src, alt: "Technical Laboratory", aspect: "aspect-[3/4]", offset: "-translate-x-4", from: { x: 40 }, to: { x: -4 }, delay: 0.2 },
-    { src: images.mobile.src, alt: "Mobile Phone Repair", aspect: "aspect-square", offset: "", from: { y: 40, rotate: 3 }, to: { y: 0, rotate: 0 }, delay: 0.4 },
+    { src: images.lab.src, alt: "Technical Laboratory", sizes: imageSizes.aboutLab, aspect: "aspect-[3/4]", offset: "-translate-x-4", from: { x: 40 }, to: { x: -4 }, delay: 0.2 },
+    { src: images.mobile.src, alt: "Mobile Phone Repair", sizes: imageSizes.aboutMobile, aspect: "aspect-square", offset: "", from: { y: 40, rotate: 3 }, to: { y: 0, rotate: 0 }, delay: 0.4 },
   ],
 ];
 
@@ -49,7 +50,7 @@ export function About() {
                           src={photo.src}
                           alt={photo.alt}
                           fill
-                          sizes="(min-width: 1024px) 25vw, 50vw"
+                          sizes={photo.sizes}
                           className="object-cover"
                         />
                       </div>

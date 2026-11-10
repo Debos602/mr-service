@@ -56,6 +56,26 @@ export const images = {
   mobile: { src: "/images/mobile_repair.png", width: 1920, height: 950 },
 } as const;
 
+/**
+ * `sizes` hints for next/image, measured per layout range on the real page.
+ * Most photos are cropped with object-cover into frames narrower than the
+ * photo, so they must be downloaded wider than the frame (a 2:1 photo in a
+ * 3:4 frame needs ~2.7x the frame width) or they render blurry. On phones
+ * the Workspace tiles have a fixed min-height, hence the max() floors.
+ */
+export const imageSizes = {
+  hero: "(min-width: 1536px) 705px, (min-width: 1280px) 577px, 449px",
+  whyWorkshop: "(min-width: 1536px) 626px, (min-width: 1280px) 511px, (min-width: 1024px) 396px, (min-width: 768px) 705px, 118vw",
+  aboutAppliance: "(min-width: 1536px) 332px, (min-width: 1280px) 268px, (min-width: 1024px) 204px, (min-width: 768px) 336px, 44vw",
+  aboutTv: "(min-width: 1536px) 896px, (min-width: 1280px) 722px, (min-width: 1024px) 550px, (min-width: 768px) 906px, 118vw",
+  aboutLab: "(min-width: 1536px) 664px, (min-width: 1280px) 536px, (min-width: 1024px) 408px, (min-width: 768px) 672px, 88vw",
+  aboutMobile: "(min-width: 1536px) 671px, (min-width: 1280px) 542px, (min-width: 1024px) 413px, (min-width: 768px) 680px, 89vw",
+  workspaceMain: "(min-width: 1536px) 732px, (min-width: 1280px) 604px, (min-width: 1024px) 476px, (min-width: 768px) 424px, max(95vw, 400px)",
+  workspaceAppliance: "(min-width: 1536px) 354px, (min-width: 1280px) 290px, (min-width: 1024px) 226px, (min-width: 768px) 200px, max(47vw, 200px)",
+  workspaceTv: "405px",
+  workspaceLab: "(min-width: 1536px) 732px, (min-width: 1280px) 604px, (min-width: 1024px) 476px, (min-width: 768px) 348px, 95vw",
+} as const;
+
 export const hero = {
   badge: `Available ${site.hours}`,
   titleStart: "Fast & Reliable",

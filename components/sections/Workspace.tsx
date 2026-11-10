@@ -3,7 +3,7 @@ import { Camera } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MotionDiv } from "@/components/ui/motion";
 import { inView } from "@/lib/motion";
-import { images } from "@/lib/content";
+import { images, imageSizes } from "@/lib/content";
 
 const tileBase =
   "group relative overflow-hidden rounded-card bg-line";
@@ -42,7 +42,7 @@ export function Workspace() {
               src={images.workshop.src}
               alt="MR SERVICES Diagnostic Center"
               fill
-              sizes="(min-width: 768px) 50vw, 100vw"
+              sizes={imageSizes.workspaceMain}
               className={imgBase}
             />
             <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/60 to-transparent p-8">
@@ -56,12 +56,12 @@ export function Workspace() {
           </MotionDiv>
 
           <MotionDiv {...inView({ y: 30 }, { duration: 0.5, delay: 0.2 })} className={`${tileBase} min-h-[200px]`}>
-            <Image src={images.appliance.src} alt="Branded Appliance Repair" fill sizes="(min-width: 768px) 25vw, 50vw" className={imgBase} />
+            <Image src={images.appliance.src} alt="Branded Appliance Repair" fill sizes={imageSizes.workspaceAppliance} className={imgBase} />
             <div className="absolute inset-0 bg-ink/10 transition-colors group-hover:bg-transparent" />
           </MotionDiv>
 
           <MotionDiv {...inView({ y: 30 }, { duration: 0.5, delay: 0.35 })} className={`${tileBase} min-h-[200px]`}>
-            <Image src={images.tv.src} alt="Expert LED TV Repair" fill sizes="(min-width: 768px) 25vw, 50vw" className={imgBase} />
+            <Image src={images.tv.src} alt="Expert LED TV Repair" fill sizes={imageSizes.workspaceTv} className={imgBase} />
             <div className="absolute inset-0 bg-ink/10 transition-colors group-hover:bg-transparent" />
           </MotionDiv>
 
@@ -69,7 +69,7 @@ export function Workspace() {
             {...inView({ y: 30 }, { duration: 0.6, delay: 0.45 })}
             className={`${tileBase} col-span-2 min-h-[200px]`}
           >
-            <Image src={images.lab.src} alt="Diagnostic Laboratory - MR SERVICES" fill sizes="(min-width: 768px) 50vw, 100vw" className={imgBase} />
+            <Image src={images.lab.src} alt="Diagnostic Laboratory - MR SERVICES" fill sizes={imageSizes.workspaceLab} className={imgBase} />
             <div className="absolute inset-0 flex items-center bg-gradient-to-r from-ink/50 to-transparent p-8">
               <MotionDiv {...inView({ x: -20 }, { duration: 0.5, delay: 0.6 })}>
                 <p className="text-2xl font-black text-white">Precision Testing</p>

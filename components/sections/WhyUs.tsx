@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MotionDiv } from "@/components/ui/motion";
-import { features, images, stats, type FeatureIcon } from "@/lib/content";
+import { features, images, imageSizes, stats, type FeatureIcon } from "@/lib/content";
 import { inView } from "@/lib/motion";
 
 const icons: Record<FeatureIcon, typeof Zap> = {
@@ -74,7 +74,7 @@ export function WhyUs() {
                 src={images.workshop.src}
                 alt="Professional Electronics Repair Workshop"
                 fill
-                sizes="(min-width: 1024px) 45vw, 100vw"
+                sizes={imageSizes.whyWorkshop}
                 className="object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-transparent" />
